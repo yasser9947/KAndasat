@@ -16,19 +16,22 @@ const allmember1 = [{ name: "أحمد العبدالكريم", eidText: "لم ي
 let allmember
 function sortByAge(arr) {
     arr.sort((a, b) => a.likes.length > b.likes.length ? 1 : -1);
-  }
+}
 axios.get('https://sei12.herokuapp.com/kandasat')
     .then(res => {
         allmember = res.data
-       
-          sortByAge(allmember)
-          allmember = allmember.reverse() 
+
+        sortByAge(allmember)
+        allmember = allmember.reverse()
         let persons = document.getElementById('homes')
         console.log(persons)
         allmember.forEach(ele => {
 
 
-            persons.innerHTML += ` <div class="home">
+            if (!ele.flag) {
+
+
+                persons.innerHTML += ` <div class="home">
             <img src="${ele.img}" alt="House 1" class="home__img" style = "height: 400px; object-fit: cover;">
    
              <div class = "home__like">
@@ -46,25 +49,25 @@ axios.get('https://sei12.herokuapp.com/kandasat')
 
    
         </div>`
-
+            }
         });
         $('.heart').on('click', function () {
 
             let id = $(this).attr('id')
             if (!$(this).hasClass("clickd")) {
-              
-                $(this).toggleClass('is_animating').addClass('clickd').removeClass('dobleclick')
-             
-                $(this).parent().find("h1").text( (Number($(this).parent().find("h1").text()) + 1).toString())
 
-    
+                $(this).toggleClass('is_animating').addClass('clickd').removeClass('dobleclick')
+
+                $(this).parent().find("h1").text((Number($(this).parent().find("h1").text()) + 1).toString())
+
+
                 axios.post('https://sei12.herokuapp.com/kandasat/likes', { id: id, like: localStorage.id, off: false }).then(
 
                     console.log()
                 )
             }
             else {
-                $(this).parent().find("h1").text( (Number($(this).parent().find("h1").text()) -1).toString())
+                $(this).parent().find("h1").text((Number($(this).parent().find("h1").text()) - 1).toString())
 
                 $(this).removeClass('clickd').addClass("dobleclick").removeClass("is_animating");
                 axios.post('https://sei12.herokuapp.com/kandasat/likes', { id: id, like: localStorage.id, off: true }).then(
@@ -86,10 +89,12 @@ axios.get('https://sei12.herokuapp.com/kandasat')
                 // compare first click to this click and see if they occurred within double click threshold
                 if (((new Date().getTime()) - touchtime) < 800) {
                     // double click occurred
+                    if (!$(this).parent().find(".heart").hasClass("clickd")) $(this).parent().find("h1").text((Number($(this).parent().find("h1").text()) + 1).toString())
                     $(this).parent().find(".heart").toggleClass('is_animating').addClass('clickd').removeClass('dobleclick')
                     let id = $(this).parent().find(".heart").attr('id')
-                    console.log(Number($(this).parent().find("h1").text()))
-                    $(this).parent().find("h1").text( (Number($(this).parent().find("h1").text()) + 1).toString())
+
+                    console.log($(this).parent().find(".heart").hasClass("clickd"))
+
                     // console.log($(this).parent().find(".heart").toggleClass('is_animating').addClass('clickd').removeClass('dobleclick'))
                     touchtime = 0;
                     axios.post('https://sei12.herokuapp.com/kandasat/likes', { id: id, like: localStorage.id, off: false }).then(

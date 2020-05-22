@@ -1,0 +1,186 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+@keyframes changePic {
+    0% {
+        background-image: linear-gradient(to right bottom ,#6f82d58c,#043f61ca) ,url(../img/zulfi.jpg);   /* رابط الصورة  */
+    }
+    
+    50% {
+    
+        background-image: linear-gradient(to right bottom ,#6f82d58c,#043f61ca) ,url(../img/zulfi2.jpg);   /* رابط الصورة  */
+    }
+    100% {
+      
+        background-image: linear-gradient(to right bottom ,#6f82d58c,#043f61ca) ,url(../img/zulfi4.jpg);   /* رابط الصورة  */
+    }
+    }
+    
+
+ 
+    
+  
+    
+    
+    .logo-box {
+     
+    }
+    
+    .text-box{
+   
+        transform: translate(-50% , -50%); /*  لاجل تحريكها للمكان المطلوب */
+        text-align: center;
+    }
+    
+    .logo{
+        height: 3.5rem;
+       
+    }
+    
+    
+    .heading-primary{
+       
+        text-transform: uppercase;
+        margin-bottom: 6rem ;
+        backface-visibility: hidden; /* تضبيط تغير المكان بعد الانيميشن مع انه ما تغير معي وتغير مع الكورس */ 
+    }
+    
+    .heading-primary-main{
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+       
+        animation: moveInLeft;  /*  تشغيل الانيميشن*/
+        animation-duration: 2s;  /*  سرعه تشغيل  الانيميشن*/
+        animation-timing-function: ease-out; /*  التحكم بالتشغيل */
+       
+        /* animation-delay: 3s;  انتضار حتى تشغيلها 
+          animation-iteration-count: 3;  عدد مرات تشغيلها 
+          animation-timing-function: ease-out;   التحكم بالتشغيل 
+        */
+    }
+    
+    .heading-primary-sub{
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+    
+        animation: moveInRight 2s ease-out;  /* اختصار للي قبله*/
+    
+    }
+    /* تعريف الانميشن  */
+    @keyframes moveInLeft{
+        0% {
+            opacity: 0; /*  معدل الشفافيه */
+            transform: translateX(-10rem);   /*  الانتقال */
+        } 
+    
+        50%{
+            color: rebeccapurple;
+        }
+        80%{
+            transform: translateX(1rem); 
+            color: rgb(117, 153, 51);
+        }
+        100%{
+            opacity: 1;
+            transform: translate(0);
+        }
+    
+    }
+    @keyframes moveInRight{
+        0% {
+            opacity: 0; /*  معدل الشفافيه */
+            transform: translateX(10rem);   /*  الانتقال */
+        }
+        50% {
+            
+        }
+        80%{
+            transform: translateX(-1rem); 
+        }
+        100%{
+            opacity: 1;
+            transform: translate(0);
+        }
+    
+    }
+    @keyframes moveInBotton{
+        0% {
+            opacity: 0; /*  معدل الشفافيه */
+            transform: translateY(3rem);   /*  الانتقال */
+        }
+        50% {
+            
+        }
+      
+        100%{
+            opacity: 1;
+            transform: translate(0);
+        }
+    
+    }
+
+.btn2:link ,
+.btn2:visited{
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;  /* عشان الهوفر و الكتف يكون لهم حركه انتقال */
+    position: relative;
+    font-size: 1.6rem;
+    background-color: #777;
+    color: rgb(204, 197, 197);
+   
+}
+
+.btn2:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3) ;
+}
+
+.btn2:active  /*  عند الضغط */  
+{
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) ;
+}
+
+.btn2-white {
+    background-color: #fff;
+    color: #777;
+
+}
+
+.btn2::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s ;
+
+}
+.btn2-white::after{
+    background-color: #fff;
+
+}
+.btn2:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+        
+}
+.btn2-animated {
+    animation: moveInBotton 0.5s ease-out 0.75s ;
+    animation-fill-mode: backwards;
+}
